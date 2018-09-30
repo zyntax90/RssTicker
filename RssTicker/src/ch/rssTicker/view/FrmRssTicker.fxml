@@ -79,7 +79,7 @@
                                     <Label text="State" />
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Start" />
+                                          <Button mnemonicParsing="false" onAction="#startRssTicker" prefHeight="25.0" prefWidth="80.0" text="Start" />
                                           <Button mnemonicParsing="false" onAction="#setConfig" prefHeight="25.0" prefWidth="80.0" text="Config" />
                                        </children>
                                        <GridPane.margin>

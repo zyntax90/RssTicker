@@ -1,25 +1,22 @@
 package ch.rssTicker.controller;
 
+import ch.rssTicker.model.RssConfig;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class RssTickerController {
 
-	
-	@FXML
-	private TextField nameTF;
-	@FXML
-	private TextField subberTF;
-	@FXML
-	private TextField urlTF;
-	@FXML
-	private TextField criteriasTF;
-		
-	public RssTickerController() {
+	private RssFetcher rssFetcher;
+	private RssConfig rssConfig;
+
+	public void initialize() {
+
+		rssConfig = new RssConfig();
+		rssConfig.setUrl("https://nyaa.si/?page=rss");
+		rssConfig.setSubber("HorribleSubs");
 
 	}
 
@@ -33,5 +30,13 @@ public class RssTickerController {
 		} catch (Exception e) {
 			System.err.println(e);
 		}
+	}
+
+	@FXML
+	public void startRssTicker() {
+
+		rssFetcher = new RssFetcher(rssConfig.getUrl());
+		Thread thread = new Thread(rssFetcher);
+		thread.start();
 	}
 }
