@@ -1,6 +1,5 @@
 package ch.rssTicker.controller;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +12,7 @@ public class Starter extends Application {
 
 		Application.launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/ch/rssTicker/view/FrmRssTicker.fxml"));
@@ -21,9 +20,9 @@ public class Starter extends Application {
 		primaryStage.setTitle("RssTorrentTicker");
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
+		primaryStage.setResizable(false);
 		primaryStage.show();
 
 	}
-	
 
 }
