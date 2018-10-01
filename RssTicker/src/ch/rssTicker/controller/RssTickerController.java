@@ -22,6 +22,7 @@ public class RssTickerController {
 
 	@FXML
 	public void setConfig() {
+
 		try {
 			Parent rootConfig = FXMLLoader.load((getClass().getResource("/ch/rssTicker/view/FrmRssTickerConfig.fxml")));
 			Stage stage = new Stage();

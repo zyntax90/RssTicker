@@ -15,6 +15,7 @@ public class Starter extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		Parent root = FXMLLoader.load(getClass().getResource("/ch/rssTicker/view/FrmRssTicker.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("RssTorrentTicker");
