@@ -1,17 +1,17 @@
 package ch.rssTicker.controller;
 
 import java.util.Collections;
+import java.util.TimerTask;
 import java.util.Map.Entry;
-
 
 import ch.common.utils.Mail;
 import ch.common.utils.MailUtil;
 import ch.common.utils.RssChannel;
 import ch.common.utils.RssItem;
 import ch.common.utils.RssUtil;
-import javafx.application.Platform;
 
-public class RssFetcher implements Runnable {
+
+public class RssFetcher extends TimerTask {
 
 	private RssUtil rssUtil;
 
@@ -21,26 +21,9 @@ public class RssFetcher implements Runnable {
 
 	@Override
 	public void run() {
-
-		while (!Thread.currentThread().isInterrupted()) {
-			Platform.runLater(new Runnable() {
-
-				@Override
-				public void run() {
-					// Do something
-					RssChannel channel = rssUtil.getObjectFromRssFeed();
-					Object content = createContentForMail(channel);
-					sendMail(content);
-				}
-			});
-
-			try {
-				Thread.sleep(60000);
-			} catch (InterruptedException e) {
-				System.err.println(e);
-			}
-		}
-		Thread.currentThread().interrupt();
+		RssChannel channel = rssUtil.getObjectFromRssFeed();
+		Object content = createContentForMail(channel);
+		sendMail(content);
 	}
 
 	private Object createContentForMail(RssChannel channel) {
@@ -54,7 +37,7 @@ public class RssFetcher implements Runnable {
 			for (Entry<String, String> otherValue : rssItem.getOtherValues().entrySet()) {
 				stringBuffer.append(String.format("%s: %s\n", otherValue.getKey(), otherValue.getValue()));
 			}
-			
+
 			stringBuffer.append(String.join("", Collections.nCopies(100, "-")));
 			stringBuffer.append("\n");
 		}
@@ -66,5 +49,4 @@ public class RssFetcher implements Runnable {
 		mailUtil.sendMail("smtp.googlemail.com",
 				new Mail("RssFeedDownloader", "roshan90@hispeed.ch", "RSSFeed-Anime", content));
 	}
-
 }

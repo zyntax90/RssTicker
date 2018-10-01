@@ -1,5 +1,8 @@
 package ch.rssTicker.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ch.rssTicker.model.RssConfig;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +12,7 @@ import javafx.stage.Stage;
 
 public class RssTickerController {
 
-	private RssFetcher rssFetcher;
+	private TimerTask rssFetcher;
 	private RssConfig rssConfig;
 
 	public void initialize() {
@@ -37,7 +40,7 @@ public class RssTickerController {
 	public void startRssTicker() {
 
 		rssFetcher = new RssFetcher(rssConfig.getUrl());
-		Thread thread = new Thread(rssFetcher);
-		thread.start();
+		Timer timer = new Timer();
+		timer.schedule(rssFetcher, rssConfig.getFrequency());
 	}
 }
