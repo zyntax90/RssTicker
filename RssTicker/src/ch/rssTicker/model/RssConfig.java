@@ -1,17 +1,22 @@
 package ch.rssTicker.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javafx.beans.property.ListProperty;
+
+import java.io.Serializable;
+
 import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class RssConfig {
+public class RssConfig implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
 	private StringProperty name;
 	private StringProperty subber;
 	private StringProperty url;
@@ -28,7 +33,7 @@ public class RssConfig {
 		criterias = new SimpleStringProperty();
 	}
 
-	public StringProperty getName() {
+	public StringProperty getNameProperty() {
 		return name;
 	}
 
@@ -36,7 +41,11 @@ public class RssConfig {
 		this.name.set(name);
 	}
 
-	public StringProperty getSubber() {
+	public String getName() {
+		return this.name.get();
+	}
+
+	public StringProperty getSubberProperty() {
 		return subber;
 	}
 
@@ -44,7 +53,11 @@ public class RssConfig {
 		this.subber.set(String.format("[%s]", subber));
 	}
 
-	public StringProperty getUrl() {
+	public String getSubber() {
+		return this.subber.get();
+	}
+
+	public StringProperty getUrlProperty() {
 		return url;
 	}
 
@@ -52,7 +65,11 @@ public class RssConfig {
 		this.url.set(url);
 	}
 
-	public LongProperty getFrequency() {
+	public String getUrl() {
+		return this.url.get();
+	}
+
+	public LongProperty getFrequencyProperty() {
 		return frequency;
 	}
 
@@ -60,12 +77,42 @@ public class RssConfig {
 		this.frequency.set(frequency);
 	}
 
-	public void addMailReceiver(String receiver) {
-		this.mailReceivers.set(String.format("%sASDASD%s", receiver,this.mailReceivers.get()));
+	public long getFrequency() {
+		return this.frequency.get();
 	}
 
-	public StringProperty getMailReceivers() {
+	public void setMailReceivers(String receiver) {
+		this.mailReceivers.set(receiver);
+	}
+
+	public StringProperty getMailReceiversProperty() {
 		return this.mailReceivers;
+	}
+
+	public String getMailReceivers() {
+		return this.mailReceivers.get();
+
+	}
+	
+	public void setCriterias(String criteria) {
+		this.criterias.set(criteria);
+	}
+
+	public StringProperty getCriteriasProperty() {
+		return this.criterias;
+	}
+
+	public String getCriterias() {
+		return this.criterias.get();
+
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

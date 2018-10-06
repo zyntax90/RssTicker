@@ -24,22 +24,24 @@ public class RssTickerConfigController {
 	
 	private RssConfig rssConfig;
 	
+	public RssTickerConfigController(RssConfig rssConfig) {
+		if(rssConfig != null)
+			rssConfig = new RssConfig(); 
+	}
+	
 	public void initialize() {
-		rssConfig = new RssConfig();
 		//rssUrlTF.textProperty().bindBidirectional(rssConfig.getUrl());
-		nameTF.textProperty().bindBidirectional(rssConfig.getName());
+		nameTF.textProperty().bindBidirectional(rssConfig.getNameProperty());
 		//subberTF.textProperty().bindBidirectional(rssConfig.getSubber());
-		frequencySL.valueProperty().bindBidirectional(rssConfig.getFrequency());
-		mailReceiversTF.textProperty().bindBidirectional(rssConfig.getMailReceivers());
+		frequencySL.valueProperty().bindBidirectional(rssConfig.getFrequencyProperty());
+		mailReceiversTF.textProperty().bindBidirectional(rssConfig.getMailReceiversProperty());
 	}
 	
 	@FXML
 	public void confirm() {
-		System.out.println(rssConfig.getName().toString());
+		System.out.println(rssConfig.getName());
 		System.out.println(rssConfig.getFrequency());
 		System.out.println(rssConfig.getMailReceivers());
-		
-	
 	}
 	
 	@FXML

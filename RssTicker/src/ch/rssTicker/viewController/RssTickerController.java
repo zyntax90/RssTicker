@@ -21,7 +21,6 @@ public class RssTickerController {
 		rssConfig = new RssConfig();
 		rssConfig.setUrl("https://nyaa.si/?page=rss");
 		rssConfig.setSubber("HorribleSubs");
-
 	}
 
 	@FXML
@@ -40,8 +39,9 @@ public class RssTickerController {
 	@FXML
 	public void startRssTicker() {
 
-		rssFetcher = new RssFetcher(rssConfig.getUrl().getValue());
+		rssFetcher = new RssFetcher(rssConfig.getUrl());
 		Timer timer = new Timer();
-		timer.schedule(rssFetcher, rssConfig.getFrequency().getValue());
+		timer.schedule(rssFetcher, rssConfig.getFrequency());
 	}
 }
+
