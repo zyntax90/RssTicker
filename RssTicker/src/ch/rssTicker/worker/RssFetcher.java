@@ -1,4 +1,4 @@
-package ch.rssTicker.controller;
+package ch.rssTicker.worker;
 
 import java.util.Collections;
 import java.util.TimerTask;

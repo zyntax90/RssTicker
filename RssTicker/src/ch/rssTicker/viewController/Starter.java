@@ -1,4 +1,4 @@
-package ch.rssTicker.controller;
+package ch.rssTicker.viewController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Starter extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/ch/rssTicker/view/FrmRssTicker.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("FrmRssTicker.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("RssTorrentTicker");
 		primaryStage.setScene(scene);

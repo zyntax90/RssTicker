@@ -1,9 +1,10 @@
-package ch.rssTicker.controller;
+package ch.rssTicker.viewController;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.rssTicker.model.RssConfig;
+import ch.rssTicker.worker.RssFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class RssTickerController {
 	public void setConfig() {
 
 		try {
-			Parent rootConfig = FXMLLoader.load((getClass().getResource("/ch/rssTicker/view/FrmRssTickerConfig.fxml")));
+			Parent rootConfig = FXMLLoader.load((getClass().getResource("FrmRssTickerConfig.fxml")));
 			Stage stage = new Stage();
 			stage.setScene(new Scene(rootConfig));
 			stage.show();
@@ -39,8 +40,8 @@ public class RssTickerController {
 	@FXML
 	public void startRssTicker() {
 
-		rssFetcher = new RssFetcher(rssConfig.getUrl());
+		rssFetcher = new RssFetcher(rssConfig.getUrl().getValue());
 		Timer timer = new Timer();
-		timer.schedule(rssFetcher, rssConfig.getFrequency());
+		timer.schedule(rssFetcher, rssConfig.getFrequency().getValue());
 	}
 }
