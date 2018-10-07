@@ -18,7 +18,7 @@ public class RssTickerController {
 
 	public void initialize() {
 
-		rssConfig = new RssConfig();
+		rssConfig = RssConfig.get();
 		rssConfig.setUrl("https://nyaa.si/?page=rss");
 		rssConfig.setSubber("HorribleSubs");
 	}

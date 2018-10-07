@@ -25,8 +25,8 @@ public class RssTickerConfigController {
 	private RssConfig rssConfig;
 	
 	public RssTickerConfigController(RssConfig rssConfig) {
-		if(rssConfig != null)
-			rssConfig = new RssConfig(); 
+//		if (rssConfig != null)
+//			rssConfig = new RssConfig();
 	}
 	
 	public void initialize() {

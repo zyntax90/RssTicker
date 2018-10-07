@@ -3,16 +3,16 @@
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 15.09.2018 16:33:19 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
- <class name="ch.rssTicker.model.RssConfig" table="rssticker_config">
+ <class name="ch.rssTicker.persistence.RssConfigDTO" table="rssticker_config">
   <id column="ID" name="Id">
   <generator class="identity"/>
   </id>
-  <property column="NAME" name="name" type="string" not-null="true"/>
-  <property column="SUBBER" name="subber" type="string" not-null="true"/>
-  <property column="URL" name="url" type="string" not-null="true"/>
-  <property column="FREQUENCY" name="frequency" type="bigint" not-null="true"/>
-  <property column="RECEIVERS" name="receivers" type="string" not-null="true"/>
-  <property column="CRITERIAS" name="criterias" type="string" not-null="true"/>
+  <property column="NAME" name="Name" type="string" not-null="true"/>
+  <property column="SUBBER" name="Subber" type="string" not-null="false"/>
+  <property column="URL" name="Url" type="string" not-null="true"/>
+  <property column="FREQUENCY" name="Frequency" type="long" not-null="true"/>
+  <property column="RECEIVERS" name="MailReceivers" type="string" not-null="true"/>
+  <property column="CRITERIAS" name="Criterias" type="string" not-null="false"/>
   
  </class>
 </hibernate-mapping>

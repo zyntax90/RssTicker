@@ -1,21 +1,13 @@
 package ch.rssTicker.model;
 
 
-
-import java.io.Serializable;
-
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class RssConfig implements Serializable{
+public class RssConfig {
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private StringProperty name;
 	private StringProperty subber;
@@ -24,7 +16,7 @@ public class RssConfig implements Serializable{
 	private StringProperty criterias;
 	private StringProperty mailReceivers;
 
-	public RssConfig() {
+	private RssConfig() {
 		name = new SimpleStringProperty();
 		subber = new SimpleStringProperty();
 		url = new SimpleStringProperty();
@@ -33,6 +25,13 @@ public class RssConfig implements Serializable{
 		criterias = new SimpleStringProperty();
 	}
 
+	public static RssConfig get() {
+		
+		
+		return new RssConfig();
+	}
+	
+	/**BoilerPlate**/
 	public StringProperty getNameProperty() {
 		return name;
 	}
