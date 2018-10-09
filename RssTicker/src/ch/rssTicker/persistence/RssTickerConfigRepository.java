@@ -27,6 +27,6 @@ public class RssTickerConfigRepository {
 			HibernateUtil.destroyRegistryBuilder();
 		}
 		
-		return configData.get(0);
+		return configData == null || configData.size() < 1 ? null : configData.get(0);
 	}
 }

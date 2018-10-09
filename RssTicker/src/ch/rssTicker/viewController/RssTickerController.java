@@ -19,15 +19,19 @@ public class RssTickerController {
 	public void initialize() {
 
 		rssConfig = RssConfig.get();
-		rssConfig.setUrl("https://nyaa.si/?page=rss");
-		rssConfig.setSubber("HorribleSubs");
+		// rssConfig.setUrl("https://nyaa.si/?page=rss");
+//		rssConfig.setSubber("HorribleSubs");
 	}
 
 	@FXML
 	public void setConfig() {
 
 		try {
-			Parent rootConfig = FXMLLoader.load((getClass().getResource("FrmRssTickerConfig.fxml")));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FrmRssTickerConfig.fxml"));
+			Parent rootConfig = (Parent)fxmlLoader.load();
+			RssTickerConfigController rssTickerConfigController = fxmlLoader.<RssTickerConfigController>getController();
+			rssTickerConfigController.setRssConfig(rssConfig);
+			rssTickerConfigController.initBindings();
 			Stage stage = new Stage();
 			stage.setScene(new Scene(rootConfig));
 			stage.show();
@@ -44,4 +48,3 @@ public class RssTickerController {
 		timer.schedule(rssFetcher, rssConfig.getFrequency());
 	}
 }
-
