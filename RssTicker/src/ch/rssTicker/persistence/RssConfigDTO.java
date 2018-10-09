@@ -3,13 +3,13 @@ package ch.rssTicker.persistence;
 
 public class RssConfigDTO {
 	
-	public int Id;
-	public String Name;
-	public String Subber;
-	public String Url;
-	public long Frequency;
-	public String Criterias;
-	public String MailReceivers;
+	private int Id;
+	private String Name;
+	private String Subber;
+	private String Url;
+	private long Frequency;
+	private String Criterias;
+	private String MailReceivers;
 	
 	public int getId() {
 		return Id;

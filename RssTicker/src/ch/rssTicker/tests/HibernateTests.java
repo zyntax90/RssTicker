@@ -75,7 +75,7 @@ public class HibernateTests {
 			session.beginTransaction();
 			session.delete(rssConfigDTO);
 			session.getTransaction().commit();
-			assertTrue(session.get(RssConfigDTO.class, rssConfigDTO.Id) == null);
+			assertTrue(session.get(RssConfigDTO.class, rssConfigDTO.getId()) == null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

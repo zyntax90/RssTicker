@@ -1,6 +1,8 @@
 package ch.rssTicker.model;
 
 
+import ch.rssTicker.persistence.RssConfigDTO;
+import ch.rssTicker.persistence.RssTickerConfigRepository;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,8 +29,22 @@ public class RssConfig {
 
 	public static RssConfig get() {
 		
+		return fetchData();
+	}
+	
+	private static RssConfig fetchData() {
 		
-		return new RssConfig();
+		RssConfigDTO rssConfigDTO= RssTickerConfigRepository.get();
+		RssConfig rssConfig = new RssConfig();
+		rssConfig.setId(rssConfigDTO.getId());
+		rssConfig.setName(rssConfigDTO.getName());
+		rssConfig.setFrequency(rssConfigDTO.getFrequency());
+		rssConfig.setSubber(rssConfigDTO.getSubber());
+		rssConfig.setCriterias(rssConfigDTO.getCriterias());
+		rssConfig.setMailReceivers(rssConfigDTO.getMailReceivers());
+		rssConfig.setUrl(rssConfigDTO.getUrl());
+		
+		return rssConfig;
 	}
 	
 	/**BoilerPlate**/
