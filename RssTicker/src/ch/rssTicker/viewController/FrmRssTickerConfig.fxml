@@ -26,13 +26,13 @@
               </rowConstraints>
                <children>
                   <Label text="RSS-URL" />
-                  <TextField promptText="e.g.: http://RssFeed.com" GridPane.columnIndex="1" />
+                  <TextField fx:id="rssUrlTF" promptText="e.g.: http://RssFeed.com" GridPane.columnIndex="1" />
                   <Label text="Name" GridPane.rowIndex="1" />
                   <TextField fx:id="nameTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="subberTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Subber" GridPane.rowIndex="2" />
                   <Label text="Criterias" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="criteriasTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Frequency " GridPane.rowIndex="3" />
                   <Label text="Mail-Receivers" GridPane.rowIndex="4" />
                   <TextField fx:id="mailReceiversTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />

@@ -16,19 +16,13 @@ public class RssTickerController {
 	private TimerTask rssFetcher;
 	private RssConfig rssConfig;
 
-	public void initialize() {
-
-		rssConfig = RssConfig.get();
-		// rssConfig.setUrl("https://nyaa.si/?page=rss");
-//		rssConfig.setSubber("HorribleSubs");
-	}
-
+	
 	@FXML
 	public void setConfig() {
 
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FrmRssTickerConfig.fxml"));
-			Parent rootConfig = (Parent)fxmlLoader.load();
+			Parent rootConfig = (Parent) fxmlLoader.load();
 			RssTickerConfigController rssTickerConfigController = fxmlLoader.<RssTickerConfigController>getController();
 			rssTickerConfigController.setRssConfig(rssConfig);
 			rssTickerConfigController.initBindings();
@@ -46,5 +40,9 @@ public class RssTickerController {
 		rssFetcher = new RssFetcher(rssConfig.getUrl());
 		Timer timer = new Timer();
 		timer.schedule(rssFetcher, rssConfig.getFrequency());
+	}
+	
+	public void setRssConfig(RssConfig rssConfig) {
+		this.rssConfig = rssConfig;
 	}
 }

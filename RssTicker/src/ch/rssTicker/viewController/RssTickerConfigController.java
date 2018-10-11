@@ -44,11 +44,12 @@ public class RssTickerConfigController {
 	}
 
 	public void initBindings() {
-//		rssUrlTF.textProperty().bindBidirectional(rssConfig.getUrl());
+		rssUrlTF.textProperty().bindBidirectional(rssConfig.getUrlProperty());
 		nameTF.textProperty().bindBidirectional(rssConfig.getNameProperty());
-		// subberTF.textProperty().bindBidirectional(rssConfig.getSubber());
+		subberTF.textProperty().bindBidirectional(rssConfig.getSubberProperty());
 		frequencySL.valueProperty().bindBidirectional(rssConfig.getFrequencyProperty());
 		mailReceiversTF.textProperty().bindBidirectional(rssConfig.getMailReceiversProperty());
+		criteriasTF.textProperty().bindBidirectional(rssConfig.getCriteriasProperty());
 	}
 
 }
