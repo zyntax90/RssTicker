@@ -1,6 +1,5 @@
 package ch.rssTicker.viewController;
 
-
 import javafx.application.Preloader;
 import javafx.application.Preloader.StateChangeNotification.Type;
 import javafx.scene.Scene;
@@ -31,7 +30,6 @@ public class CustomSplashScreen extends Preloader {
 		primaryStage.setHeight(600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
 	}
 
 	@Override

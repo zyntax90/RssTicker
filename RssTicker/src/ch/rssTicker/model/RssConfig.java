@@ -17,6 +17,8 @@ public class RssConfig {
 	private StringProperty criterias;
 	private StringProperty mailReceivers;
 
+	private boolean isDirty;
+
 	private RssConfig() {
 		name = new SimpleStringProperty();
 		subber = new SimpleStringProperty();
@@ -24,11 +26,24 @@ public class RssConfig {
 		frequency = new SimpleLongProperty();
 		mailReceivers = new SimpleStringProperty();
 		criterias = new SimpleStringProperty();
+		isDirty = false;
 	}
 
 	public static RssConfig get() {
 
 		return fetchData();
+	}
+
+	public void save() {
+		saveData();
+	}
+
+	public void setDirty(boolean isDirty) {
+		this.isDirty = isDirty;
+	}
+
+	public boolean isDirty() {
+		return isDirty;
 	}
 
 	private static RssConfig fetchData() {
@@ -47,6 +62,17 @@ public class RssConfig {
 		rssConfig.setUrl(rssConfigDTO.getUrl());
 
 		return rssConfig;
+	}
+
+	private void saveData() {
+		RssConfigDTO rssConfigDTO = new RssConfigDTO();
+		rssConfigDTO.setId(getId());
+		rssConfigDTO.setName(getName());
+		rssConfigDTO.setSubber(getSubber());
+		rssConfigDTO.setUrl(getUrl());
+		rssConfigDTO.setCriterias(getCriterias());
+		rssConfigDTO.setMailReceivers(getMailReceivers());
+		rssConfigDTO.setFrequency(getFrequency());
 	}
 
 	/** BoilerPlate **/

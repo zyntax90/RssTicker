@@ -15,7 +15,6 @@ public class RssTickerController implements IController {
 
 	private TimerTask rssFetcher;
 	private RssConfig rssConfig;
-
 	private Stage rssTickerConfigStage;
 
 	@FXML
@@ -26,7 +25,7 @@ public class RssTickerController implements IController {
 			Parent rootConfig = (Parent) fxmlLoader.load();
 			RssTickerConfigController rssTickerConfigController = fxmlLoader.<RssTickerConfigController>getController();
 			rssTickerConfigController.initData(rssConfig, this);
-			rssTickerConfigController.initBindings();
+			rssTickerConfigController.initListeners();
 			rssTickerConfigStage = new Stage();
 			rssTickerConfigStage.setScene(new Scene(rootConfig));
 			rssTickerConfigStage.show();
