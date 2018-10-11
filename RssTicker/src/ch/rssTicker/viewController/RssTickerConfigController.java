@@ -22,10 +22,7 @@ public class RssTickerConfigController {
 	private TextField criteriasTF;
 
 	private RssConfig rssConfig;
-
-	public void initialize() {
-
-	}
+	private IController parentController;
 
 	@FXML
 	public void confirm() {
@@ -36,11 +33,12 @@ public class RssTickerConfigController {
 
 	@FXML
 	public void cancel() {
-
+		this.parentController.closeStage();
 	}
 
-	public void setRssConfig(RssConfig rssConfig) {
+	public void initData(RssConfig rssConfig, IController parentController) {
 		this.rssConfig = rssConfig;
+		this.parentController = parentController;
 	}
 
 	public void initBindings() {

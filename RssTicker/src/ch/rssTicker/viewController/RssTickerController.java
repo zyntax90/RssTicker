@@ -11,12 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class RssTickerController {
+public class RssTickerController implements IController {
 
 	private TimerTask rssFetcher;
 	private RssConfig rssConfig;
 
-	
+	private Stage rssTickerConfigStage;
+
 	@FXML
 	public void setConfig() {
 
@@ -24,11 +25,11 @@ public class RssTickerController {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FrmRssTickerConfig.fxml"));
 			Parent rootConfig = (Parent) fxmlLoader.load();
 			RssTickerConfigController rssTickerConfigController = fxmlLoader.<RssTickerConfigController>getController();
-			rssTickerConfigController.setRssConfig(rssConfig);
+			rssTickerConfigController.initData(rssConfig, this);
 			rssTickerConfigController.initBindings();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(rootConfig));
-			stage.show();
+			rssTickerConfigStage = new Stage();
+			rssTickerConfigStage.setScene(new Scene(rootConfig));
+			rssTickerConfigStage.show();
 		} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -41,8 +42,13 @@ public class RssTickerController {
 		Timer timer = new Timer();
 		timer.schedule(rssFetcher, rssConfig.getFrequency());
 	}
-	
+
 	public void setRssConfig(RssConfig rssConfig) {
 		this.rssConfig = rssConfig;
+	}
+
+	@Override
+	public void closeStage() {
+		rssTickerConfigStage.close();
 	}
 }
