@@ -1,11 +1,15 @@
 package ch.rssTicker.model;
 
+import java.util.List;
+
 import ch.rssTicker.persistence.RssConfigDTO;
 import ch.rssTicker.persistence.RssTickerConfigRepository;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class RssConfig {
 
@@ -29,7 +33,7 @@ public class RssConfig {
 		isDirty = false;
 	}
 
-	public static RssConfig get() {
+	public static ObservableList<RssConfig> get() {
 
 		return fetchData();
 	}
@@ -46,22 +50,27 @@ public class RssConfig {
 		return isDirty;
 	}
 
-	private static RssConfig fetchData() {
+	private static ObservableList<RssConfig> fetchData() {
+		ObservableList<RssConfig> rssConfigList = FXCollections.observableArrayList();
+		List<RssConfigDTO> rssConfigDTOList = RssTickerConfigRepository.get();
 
-		RssConfigDTO rssConfigDTO = RssTickerConfigRepository.get();
-		if (rssConfigDTO == null)
-			return new RssConfig();
+		for (RssConfigDTO part : rssConfigDTOList) {
+			RssConfig rssConfig = new RssConfig();
+			rssConfig.setId(part.getId());
+			rssConfig.setName(part.getName());
+			rssConfig.setFrequency(part.getFrequency());
+			rssConfig.setSubber(part.getSubber());
+			rssConfig.setCriterias(part.getCriterias());
+			rssConfig.setMailReceivers(part.getMailReceivers());
+			rssConfig.setUrl(part.getUrl());
+			rssConfigList.add(rssConfig);
+		}
 
-		RssConfig rssConfig = new RssConfig();
-		rssConfig.setId(rssConfigDTO.getId());
-		rssConfig.setName(rssConfigDTO.getName());
-		rssConfig.setFrequency(rssConfigDTO.getFrequency());
-		rssConfig.setSubber(rssConfigDTO.getSubber());
-		rssConfig.setCriterias(rssConfigDTO.getCriterias());
-		rssConfig.setMailReceivers(rssConfigDTO.getMailReceivers());
-		rssConfig.setUrl(rssConfigDTO.getUrl());
+		if (rssConfigList.size() < 1) {
+			rssConfigList.add(new RssConfig());
+		}
 
-		return rssConfig;
+		return rssConfigList;
 	}
 
 	private void saveData() {
@@ -157,5 +166,4 @@ public class RssConfig {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 }

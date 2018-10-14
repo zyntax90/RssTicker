@@ -10,7 +10,7 @@ import ch.common.utils.HibernateUtil;
 public class RssTickerConfigRepository {
 
 	@SuppressWarnings("unchecked")
-	public static RssConfigDTO get() {
+	public static List<RssConfigDTO> get() {
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory("Hibernate.cfg.xml", "RssTickerConfig.hbm.xml");
 		Session session = null;
@@ -27,6 +27,6 @@ public class RssTickerConfigRepository {
 			HibernateUtil.destroyRegistryBuilder();
 		}
 		
-		return configData == null || configData.size() < 1 ? null : configData.get(0);
+		return configData;
 	}
 }

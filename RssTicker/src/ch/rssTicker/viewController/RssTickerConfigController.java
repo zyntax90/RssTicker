@@ -27,7 +27,6 @@ public class RssTickerConfigController {
 	private TextField mailReceiversTF;
 	@FXML
 	private TextField criteriasTF;
-
 	private ButtonType dialogYesBtn = new ButtonType("Yes",ButtonData.YES);
 	private ButtonType dialogNoBtn = new ButtonType("No",ButtonData.CANCEL_CLOSE);
 	

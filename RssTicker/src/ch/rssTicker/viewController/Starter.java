@@ -1,9 +1,11 @@
 package ch.rssTicker.viewController;
 
+
 import com.sun.javafx.application.LauncherImpl;
 
 import ch.rssTicker.model.RssConfig;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
 @SuppressWarnings("restriction")
 public class Starter extends Application {
 
-	private RssConfig rssConfig;
+	private ObservableList<RssConfig> rssConfigList;
 
 	public static void main(String[] args) {
 
@@ -22,7 +24,7 @@ public class Starter extends Application {
 	@Override
 	public void init() throws Exception {
 		try {
-			rssConfig = RssConfig.get();
+			rssConfigList = RssConfig.get();
 		} catch (Exception e) {
 			System.out.println("Error while loading data " + e);
 			System.exit(0);
@@ -34,7 +36,8 @@ public class Starter extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FrmRssTicker.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
 		RssTickerController rssTickerController = fxmlLoader.<RssTickerController>getController();
-		rssTickerController.setRssConfig(rssConfig);
+		rssTickerController.setRssConfig(rssConfigList);
+		rssTickerController.initLayout();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("RssTorrentTicker");
 		primaryStage.setScene(scene);
