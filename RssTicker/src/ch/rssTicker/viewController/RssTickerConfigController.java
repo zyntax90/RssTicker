@@ -27,37 +27,38 @@ public class RssTickerConfigController {
 	private TextField mailReceiversTF;
 	@FXML
 	private TextField criteriasTF;
-	private ButtonType dialogYesBtn = new ButtonType("Yes",ButtonData.YES);
-	private ButtonType dialogNoBtn = new ButtonType("No",ButtonData.CANCEL_CLOSE);
-	
+	private ButtonType dialogYesBtn = new ButtonType("Yes", ButtonData.YES);
+	private ButtonType dialogNoBtn = new ButtonType("No", ButtonData.CANCEL_CLOSE);
+
 	private RssConfig rssConfig;
 	private IController parentController;
 
 	@FXML
 	public void confirm() {
 
-		if (rssConfig.isDirty()) {
-			rssConfig.setName(nameTF.textProperty().getValue());
-			rssConfig.setDirty(false);
+		if (rssConfig.hasDirtyFields()) {
+			rssConfig.setDirtyPropertyValues();
+			rssConfig.clearDirtyList();
 		}
 		this.parentController.closeStage();
 	}
 
 	@FXML
 	public void cancel() {
-		if (rssConfig.isDirty()) {
+		if (rssConfig.hasDirtyFields()) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("RssTickerConfig");
 			alert.setHeaderText("Unsaved config changes");
 			alert.setContentText("There are unsaved changes. Continue without saving?");
-			alert.getButtonTypes().setAll(dialogNoBtn,dialogYesBtn);
+			alert.getButtonTypes().setAll(dialogNoBtn, dialogYesBtn);
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.YES) {
-				rssConfig.setDirty(false);
+				rssConfig.clearDirtyList();
 				this.parentController.closeStage();
 			}
+
 		} else {
-			rssConfig.setDirty(false);
+			rssConfig.clearDirtyList();
 			this.parentController.closeStage();
 		}
 	}
@@ -87,12 +88,12 @@ public class RssTickerConfigController {
 	private void validate(StringProperty property, String oldValue, String newValue) {
 		if (oldValue != null && oldValue.equals(newValue))
 			return;
-		rssConfig.setDirty(true);
+		rssConfig.addToDirtyList(property, newValue);
 	}
 
 	private void validate(LongProperty property, Number oldValue, Number newValue) {
 		if (oldValue != null || oldValue == newValue)
 			return;
-		rssConfig.setDirty(true);
+		rssConfig.addToDirtyList(property, newValue);
 	}
 }

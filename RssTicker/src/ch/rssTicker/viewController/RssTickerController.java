@@ -62,6 +62,9 @@ public class RssTickerController implements IController {
 			startBtn.setOnAction(e -> startRssTicker(d));
 			configBtn.setOnAction(e -> setConfig(d));
 
+			if(!rssConfigList.get(i).isStartable())
+				startBtn.setDisable(true);
+
 			rssConfigGP.add(stateLbl, 0, i + 1);
 			rssConfigGP.add(nameLbl, 1, i + 1);
 			rssConfigGP.add(startBtn, 2, i + 1);

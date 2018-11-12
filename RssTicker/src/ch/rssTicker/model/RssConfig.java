@@ -1,10 +1,14 @@
 package ch.rssTicker.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import ch.rssTicker.persistence.RssConfigDTO;
 import ch.rssTicker.persistence.RssTickerConfigRepository;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,8 +24,8 @@ public class RssConfig {
 	private LongProperty frequency;
 	private StringProperty criterias;
 	private StringProperty mailReceivers;
-
-	private boolean isDirty;
+	private boolean isStartable;
+	private Map<Property<?>, Object> dirtyFields;
 
 	private RssConfig() {
 		name = new SimpleStringProperty();
@@ -30,24 +34,38 @@ public class RssConfig {
 		frequency = new SimpleLongProperty();
 		mailReceivers = new SimpleStringProperty();
 		criterias = new SimpleStringProperty();
-		isDirty = false;
+		isStartable = false;
+		dirtyFields = new HashMap<>();
 	}
 
-	public static ObservableList<RssConfig> get() {
+	public void clearDirtyList() {
+		dirtyFields.clear();
+	}
 
+	public void addToDirtyList(Property<?> property, Object value) {
+		dirtyFields.put(property, value);
+	}
+
+	public boolean hasDirtyFields() {
+		return dirtyFields.size() > 0;
+	}
+
+	public void setDirtyPropertyValues() {
+		for (Map.Entry<Property<?>, Object> entry : dirtyFields.entrySet()) {
+
+			if (entry.getKey().getName() == name.getName()) {
+				setName(entry.getValue().toString());
+			}
+		}
+	}
+
+	/** Data-Methods **/
+	public static ObservableList<RssConfig> get() {
 		return fetchData();
 	}
 
 	public void save() {
 		saveData();
-	}
-
-	public void setDirty(boolean isDirty) {
-		this.isDirty = isDirty;
-	}
-
-	public boolean isDirty() {
-		return isDirty;
 	}
 
 	private static ObservableList<RssConfig> fetchData() {
@@ -66,9 +84,8 @@ public class RssConfig {
 			rssConfigList.add(rssConfig);
 		}
 
-		if (rssConfigList.size() < 1) {
+		if (rssConfigList.size() < 1)
 			rssConfigList.add(new RssConfig());
-		}
 
 		return rssConfigList;
 	}
@@ -165,5 +182,9 @@ public class RssConfig {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isStartable() {
+		return url.get() != null && !url.get().isEmpty() && isStartable;
 	}
 }
