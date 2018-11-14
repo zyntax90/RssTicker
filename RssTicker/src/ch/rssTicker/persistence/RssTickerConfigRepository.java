@@ -11,11 +11,10 @@ public class RssTickerConfigRepository {
 
 	@SuppressWarnings("unchecked")
 	public static List<RssConfigDTO> get() {
-
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory("Hibernate.cfg.xml", "RssTickerConfig.hbm.xml");
 		Session session = null;
 		List<RssConfigDTO> configData = null;
-		
+
 		try {
 			session = sessionFactory.openSession();
 			configData = session.createQuery("from RssConfigDTO").list();
@@ -26,7 +25,7 @@ public class RssTickerConfigRepository {
 			sessionFactory.close();
 			HibernateUtil.destroyRegistryBuilder();
 		}
-		
+
 		return configData;
 	}
 }

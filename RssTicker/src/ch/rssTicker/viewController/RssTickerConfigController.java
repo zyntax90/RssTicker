@@ -27,15 +27,14 @@ public class RssTickerConfigController {
 	private TextField mailReceiversTF;
 	@FXML
 	private TextField criteriasTF;
-	private ButtonType dialogYesBtn = new ButtonType("Yes", ButtonData.YES);
-	private ButtonType dialogNoBtn = new ButtonType("No", ButtonData.CANCEL_CLOSE);
 
+	private final ButtonType dialogYesBtn = new ButtonType("Yes", ButtonData.YES);
+	private final ButtonType dialogNoBtn = new ButtonType("No", ButtonData.CANCEL_CLOSE);
 	private RssConfig rssConfig;
 	private IController parentController;
 
 	@FXML
 	public void confirm() {
-
 		if (rssConfig.hasDirtyFields()) {
 			rssConfig.setDirtyPropertyValues();
 			rssConfig.clearDirtyList();
@@ -63,14 +62,13 @@ public class RssTickerConfigController {
 		}
 	}
 
-	public void initData(RssConfig rssConfig, IController parentController) {
+	public void initData(final RssConfig rssConfig, final IController parentController) {
 		this.rssConfig = rssConfig;
 		this.parentController = parentController;
 		nameTF.textProperty().setValue(this.rssConfig.getName());
 	}
 
 	public void initListeners() {
-
 		rssUrlTF.textProperty().addListener(
 				(obsValue, oldValue, newValue) -> validate(rssConfig.getUrlProperty(), oldValue, newValue));
 		nameTF.textProperty().addListener(

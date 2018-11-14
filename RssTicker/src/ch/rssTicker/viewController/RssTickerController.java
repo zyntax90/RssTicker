@@ -26,8 +26,7 @@ public class RssTickerController implements IController {
 	private ObservableList<RssConfig> rssConfigList;
 	private Stage rssTickerConfigStage;
 
-	public void setConfig(RssConfig selectedRssConfig) {
-
+	public void setConfig(final RssConfig selectedRssConfig) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FrmRssTickerConfig.fxml"));
 			Parent rootConfig = (Parent) fxmlLoader.load();
@@ -42,15 +41,13 @@ public class RssTickerController implements IController {
 		}
 	}
 
-	public void startRssTicker(RssConfig selectedRssConfig) {
-
+	public void startRssTicker(final RssConfig selectedRssConfig) {
 		rssFetcher = new RssFetcher(selectedRssConfig.getUrl());
-		Timer timer = new Timer();
-		timer.schedule(rssFetcher, selectedRssConfig.getFrequency());
+		//Timer timer = new Timer();
+		new Timer().schedule(rssFetcher, selectedRssConfig.getFrequency());
 	}
 
 	public void initLayout() {
-
 		for (int i = 0; i < rssConfigList.size(); i++) {
 
 			Button startBtn = new Button("Start");
@@ -58,13 +55,14 @@ public class RssTickerController implements IController {
 			Label stateLbl = new Label("state");
 			Label nameLbl = new Label(rssConfigList.get(i).getName());
 
-			final RssConfig d = rssConfigList.get(i);
-			startBtn.setOnAction(e -> startRssTicker(d));
-			configBtn.setOnAction(e -> setConfig(d));
+			final RssConfig currentConfig = rssConfigList.get(i);
+			startBtn.setOnAction(e -> startRssTicker(currentConfig));
+			configBtn.setOnAction(e -> setConfig(currentConfig));
 
-			if(!rssConfigList.get(i).isStartable())
+			if(!rssConfigList.get(i).isStartable()) {
 				startBtn.setDisable(true);
-
+			}
+			
 			rssConfigGP.add(stateLbl, 0, i + 1);
 			rssConfigGP.add(nameLbl, 1, i + 1);
 			rssConfigGP.add(startBtn, 2, i + 1);
@@ -72,7 +70,7 @@ public class RssTickerController implements IController {
 		}
 	}
 
-	public void setRssConfig(ObservableList<RssConfig> rssConfigList) {
+	public void setRssConfig(final ObservableList<RssConfig> rssConfigList) {
 		this.rssConfigList = rssConfigList;
 	}
 

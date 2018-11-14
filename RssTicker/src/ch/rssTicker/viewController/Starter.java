@@ -17,7 +17,6 @@ public class Starter extends Application {
 	private ObservableList<RssConfig> rssConfigList;
 
 	public static void main(String[] args) {
-
 		LauncherImpl.launchApplication(Starter.class, CustomSplashScreen.class, args);
 	}
 

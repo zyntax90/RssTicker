@@ -53,7 +53,8 @@ public class RssConfig {
 	public void setDirtyPropertyValues() {
 		for (Map.Entry<Property<?>, Object> entry : dirtyFields.entrySet()) {
 
-			if (entry.getKey().getName() == name.getName()) {
+			//TODO
+			if (entry.getKey().getName().equals(name.getName())) {
 				setName(entry.getValue().toString());
 			}
 		}
@@ -160,7 +161,6 @@ public class RssConfig {
 
 	public String getMailReceivers() {
 		return this.mailReceivers.get();
-
 	}
 
 	public void setCriterias(String criteria) {
@@ -173,7 +173,6 @@ public class RssConfig {
 
 	public String getCriterias() {
 		return this.criterias.get();
-
 	}
 
 	public int getId() {

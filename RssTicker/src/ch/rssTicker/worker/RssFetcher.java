@@ -13,7 +13,7 @@ import ch.common.utils.RssUtil;
 
 public class RssFetcher extends TimerTask {
 
-	private RssUtil rssUtil;
+	private final RssUtil rssUtil;
 
 	public RssFetcher(String url) {
 		rssUtil = new RssUtil(url);
@@ -26,7 +26,7 @@ public class RssFetcher extends TimerTask {
 		sendMail(content);
 	}
 
-	private Object createContentForMail(RssChannel channel) {
+	private Object createContentForMail(final RssChannel channel) {
 		StringBuffer stringBuffer = new StringBuffer();
 		for (RssItem rssItem : channel.getRssItems()) {
 			stringBuffer.append(String.format("%s: %s \n", RssItem.TITLE, rssItem.getTitle()));
@@ -44,7 +44,7 @@ public class RssFetcher extends TimerTask {
 		return stringBuffer.toString();
 	}
 
-	private void sendMail(Object content) {
+	private void sendMail(final Object content) {
 		MailUtil mailUtil = new MailUtil("snoopyflopp@gmail.com", "HakunaMatata");
 		mailUtil.sendMail("smtp.googlemail.com",
 				new Mail("RssFeedDownloader", "roshan90@hispeed.ch", "RSSFeed-Anime", content));
