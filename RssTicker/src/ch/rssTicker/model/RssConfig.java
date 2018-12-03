@@ -25,7 +25,7 @@ public class RssConfig {
 	private StringProperty criterias;
 	private StringProperty mailReceivers;
 	private boolean isStartable;
-	private Map<Property<?>, Object> dirtyFields;
+	private Map<Property<?>, Object> dirtyProperties;
 
 	private RssConfig() {
 		name = new SimpleStringProperty();
@@ -35,23 +35,23 @@ public class RssConfig {
 		mailReceivers = new SimpleStringProperty();
 		criterias = new SimpleStringProperty();
 		isStartable = false;
-		dirtyFields = new HashMap<>();
+		dirtyProperties = new HashMap<>();
 	}
 
 	public void clearDirtyList() {
-		dirtyFields.clear();
+		dirtyProperties.clear();
 	}
 
 	public void addToDirtyList(Property<?> property, Object value) {
-		dirtyFields.put(property, value);
+		dirtyProperties.put(property, value);
 	}
 
-	public boolean hasDirtyFields() {
-		return dirtyFields.size() > 0;
+	public boolean hasDirtyProperties() {
+		return !dirtyProperties.isEmpty();
 	}
 
 	public void setDirtyPropertyValues() {
-		for (Map.Entry<Property<?>, Object> entry : dirtyFields.entrySet()) {
+		for (Map.Entry<Property<?>, Object> entry : dirtyProperties.entrySet()) {
 
 			//TODO
 			if (entry.getKey().getName().equals(name.getName())) {

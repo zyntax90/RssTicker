@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.rssTicker.model.RssConfig;
+import ch.rssTicker.resources.Literals;
 import ch.rssTicker.worker.RssFetcher;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,9 +51,9 @@ public class RssTickerController implements IController {
 	public void initLayout() {
 		for (int i = 0; i < rssConfigList.size(); i++) {
 
-			Button startBtn = new Button("Start");
-			Button configBtn = new Button("Config");
-			Label stateLbl = new Label("state");
+			Button startBtn = new Button(Literals.BTN_START);
+			Button configBtn = new Button(Literals.BTN_CONFIG);
+			Label stateLbl = new Label(Literals.LBL_STATE);
 			Label nameLbl = new Label(rssConfigList.get(i).getName());
 
 			final RssConfig currentConfig = rssConfigList.get(i);

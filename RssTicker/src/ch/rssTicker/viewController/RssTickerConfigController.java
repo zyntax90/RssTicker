@@ -35,7 +35,7 @@ public class RssTickerConfigController {
 
 	@FXML
 	public void confirm() {
-		if (rssConfig.hasDirtyFields()) {
+		if (rssConfig.hasDirtyProperties()) {
 			rssConfig.setDirtyPropertyValues();
 			rssConfig.clearDirtyList();
 		}
@@ -44,13 +44,14 @@ public class RssTickerConfigController {
 
 	@FXML
 	public void cancel() {
-		if (rssConfig.hasDirtyFields()) {
+		if (rssConfig.hasDirtyProperties()) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("RssTickerConfig");
 			alert.setHeaderText("Unsaved config changes");
 			alert.setContentText("There are unsaved changes. Continue without saving?");
 			alert.getButtonTypes().setAll(dialogNoBtn, dialogYesBtn);
 			Optional<ButtonType> result = alert.showAndWait();
+			
 			if (result.get() == ButtonType.YES) {
 				rssConfig.clearDirtyList();
 				this.parentController.closeStage();
